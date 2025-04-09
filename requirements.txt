@@ -1,0 +1,3 @@
+datasus_db==0.1.3
+duckdb
+pandas
