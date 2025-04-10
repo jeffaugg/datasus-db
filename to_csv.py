@@ -12,13 +12,18 @@ def main():
     # Verifica as tabelas disponíveis
     tables = conn.execute("SHOW TABLES;").fetchall()
     print("Tabelas disponíveis:", tables)
-    
-    # Carrega os dados em um DataFrame
-    df = conn.execute("SELECT * FROM sim_do").fetchdf()
-    
-    # Exporta o DataFrame para CSV (sem o índice)
-    df.to_csv("sim_do_data.csv", index=False)
-    print("Dados exportados para 'sim_do_data.csv'.")
+        
+    # Exemplo de consulta para dados hospitalares SIH
+    sih_data = conn.execute("SELECT * FROM sih_rd LIMIT 10;").fetchall()
+    print("Algumas linhas da tabela SIH_RD:")
+    for row in sih_data:
+        print(row)
+        
+    # Converter para DataFrame antes de exportar para CSV
+    sih_df = conn.execute("SELECT * FROM sih_rd LIMIT 10;").df()
+    sih_df.to_csv("sih_data.csv", index=False)
+    print("Dados exportados para 'sih_data.csv'.")
+
 
 if __name__ == "__main__":
     main()
